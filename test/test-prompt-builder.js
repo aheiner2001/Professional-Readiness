@@ -80,6 +80,19 @@ assert.strictEqual(matchedIds[0], "downwinders", "Downwinders should be top matc
 // Test 4: Defensive defaults verification
 const defaultPrompt = buildTailoredAIPrompt();
 assert.ok(defaultPrompt.includes("# Master Cover Letter Generator Prompt"));
+assert.ok(defaultPrompt.includes("December 2026"), "Default prompt should include default graduation date");
+assert.ok(defaultPrompt.includes("bachelor's degree in Computer Science"), "Default prompt should include default degree");
+
+// Test 5: Dynamic degree and graduation date interpolation
+const customPrompt = buildTailoredAIPrompt({
+  masterTemplate: {
+    ...mockTemplate,
+    graduationDate: "April 2027",
+    degree: "master's degree in Artificial Intelligence"
+  }
+});
+assert.ok(customPrompt.includes("April 2027"), "Custom prompt should include customized graduation date");
+assert.ok(customPrompt.includes("master's degree in Artificial Intelligence"), "Custom prompt should include customized degree");
 
 const defaultLetter = buildWordForWordLetter();
 assert.ok(defaultLetter.includes("Sincerely,\nAaron Heiner"));

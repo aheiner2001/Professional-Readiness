@@ -73,7 +73,7 @@ Replace "[Insert Company Name]" throughout the letter with "${companyName}".
 Aim for approximately 200–300 words, or slightly longer if necessary. Keep it concise, direct, and meaningful.
 
 **7. PRIORITIZE ACCURACY**
-Never invent projects, certifications, responsibilities, technologies, or accomplishments. Do not imply I have already graduated before December 2026.
+Never invent projects, certifications, responsibilities, technologies, or accomplishments. Do not imply I have already graduated before ${masterTemplate.graduationDate || 'December 2026'}.
 If I have limited experience with a particular technology, emphasize my related experience and willingness to learn rather than pretending I am an expert.
 
 **8. FINAL OUTPUT**
@@ -108,7 +108,7 @@ ${experienceBankFormatted || "No additional experiences selected."}
 
 # PART 4: FINAL WRITING GUIDELINES
 Every letter should communicate four things:
-1. **Who I am:** A Computer Science student finishing my degree at BYU–Idaho in December 2026 who enjoys building tools and solving problems.
+1. **Who I am:** A student finishing my ${masterTemplate.degree || "bachelor's degree in Computer Science"} at BYU–Idaho in ${masterTemplate.graduationDate || 'December 2026'} who enjoys building tools and solving problems.
 2. **What I've done:** Relevant software, technical, business, or personal experiences that demonstrate my qualifications.
 3. **How I work:** Dependable, self-motivated, quick to learn, and willing to take responsibility for my work.
 4. **Why I'm applying:** I want to contribute meaningful work, continue learning, and grow alongside experienced professionals at ${companyName}.

@@ -16,8 +16,13 @@ export function createMockDbService() {
     },
     async saveMasterTemplate(userId, templateData) {
       if (!userId) return false;
-      store.set(`users/${userId}/masterTemplate/default`, { ...templateData, updatedAt: Date.now() });
-      return true;
+      try {
+        store.set(`users/${userId}/masterTemplate/default`, { ...templateData, updatedAt: Date.now() });
+        return true;
+      } catch (err) {
+        console.error("Error saving master template:", err);
+        return false;
+      }
     },
     async getExperiences(userId) {
       if (!userId) return [];
@@ -32,15 +37,25 @@ export function createMockDbService() {
     },
     async saveExperience(userId, experienceData) {
       if (!userId) return null;
-      const id = experienceData.id || `exp_${Date.now()}`;
-      const record = { ...experienceData, id, updatedAt: Date.now() };
-      store.set(`users/${userId}/experiences/${id}`, record);
-      return record;
+      try {
+        const id = experienceData.id || `exp_${Date.now()}`;
+        const record = { ...experienceData, id, updatedAt: Date.now() };
+        store.set(`users/${userId}/experiences/${id}`, record);
+        return record;
+      } catch (err) {
+        console.error("Error saving experience:", err);
+        return false;
+      }
     },
     async deleteExperience(userId, expId) {
       if (!userId || !expId) return false;
-      store.delete(`users/${userId}/experiences/${expId}`);
-      return true;
+      try {
+        store.delete(`users/${userId}/experiences/${expId}`);
+        return true;
+      } catch (err) {
+        console.error("Error deleting experience:", err);
+        return false;
+      }
     },
     async seedUserStarterData(userId) {
       if (!userId) return false;
@@ -73,9 +88,14 @@ export function createFirestoreService(db, firestoreFns) {
 
     async saveMasterTemplate(userId, templateData) {
       if (!userId || !doc || !setDoc) return false;
-      const ref = doc(db, 'users', userId, 'masterTemplate', 'default');
-      await setDoc(ref, { ...templateData, updatedAt: Date.now() }, { merge: true });
-      return true;
+      try {
+        const ref = doc(db, 'users', userId, 'masterTemplate', 'default');
+        await setDoc(ref, { ...templateData, updatedAt: Date.now() }, { merge: true });
+        return true;
+      } catch (err) {
+        console.error("Error saving master template:", err);
+        return false;
+      }
     },
 
     async getExperiences(userId) {
@@ -94,18 +114,28 @@ export function createFirestoreService(db, firestoreFns) {
 
     async saveExperience(userId, experienceData) {
       if (!userId || !doc || !setDoc) return null;
-      const expId = experienceData.id || `exp_${Date.now()}`;
-      const ref = doc(db, 'users', userId, 'experiences', expId);
-      const record = { ...experienceData, id: expId, updatedAt: Date.now() };
-      await setDoc(ref, record, { merge: true });
-      return record;
+      try {
+        const expId = experienceData.id || `exp_${Date.now()}`;
+        const ref = doc(db, 'users', userId, 'experiences', expId);
+        const record = { ...experienceData, id: expId, updatedAt: Date.now() };
+        await setDoc(ref, record, { merge: true });
+        return record;
+      } catch (err) {
+        console.error("Error saving experience:", err);
+        return false;
+      }
     },
 
     async deleteExperience(userId, expId) {
       if (!userId || !expId || !doc || !deleteDoc) return false;
-      const ref = doc(db, 'users', userId, 'experiences', expId);
-      await deleteDoc(ref);
-      return true;
+      try {
+        const ref = doc(db, 'users', userId, 'experiences', expId);
+        await deleteDoc(ref);
+        return true;
+      } catch (err) {
+        console.error("Error deleting experience:", err);
+        return false;
+      }
     },
 
     async seedUserStarterData(userId) {

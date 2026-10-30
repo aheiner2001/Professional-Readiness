@@ -362,10 +362,21 @@ assert.strictEqual(initializedState.experiences.length, initialStoryCount + 1, '
 const updatedStory = initializedState.experiences.find(e => e.id === addedStory.id);
 assert.strictEqual(updatedStory.storyText, 'Architected autonomous agent pairing pipelines with deep verification and zero duplicate IDs.', 'Existing story text should be updated in place');
 
-// Delete the story
+// Test Delete Confirmation
+let confirmResponse = false;
+globalThis.confirm = (msg) => {
+  assert.ok(msg.includes('Are you sure you want to delete this experience story?'), 'Confirm prompt should have correct message');
+  return confirmResponse;
+};
+
 inputExpId.value = addedStory.id;
 await btnDeleteExp.click();
-assert.strictEqual(initializedState.experiences.length, initialStoryCount, 'Story count should return to original');
+assert.strictEqual(initializedState.experiences.length, initialStoryCount + 1, 'Canceling confirmation should NOT delete experience');
+
+// Confirming deletion
+confirmResponse = true;
+await btnDeleteExp.click();
+assert.strictEqual(initializedState.experiences.length, initialStoryCount, 'Confirming deletion should delete experience');
 
 // Test Master Template Editing
 const tplIntroInput = getOrCreateMock('template-intro', 'textarea');
@@ -412,5 +423,50 @@ assert.ok(seedStatus.textContent.includes("reserved for Aaron's verified account
 initializedState.currentUser = { uid: 'aaron_verified', isAnonymous: false, email: 'aaron@byui.edu' };
 await btnSeedData.click();
 assert.ok(seedStatus.textContent.includes('✓ Successfully populated'), 'Aaron verified account should be allowed to seed master library');
+
+// 13. Test Tap / Click to open on already-selected card
+initializedState.activeCardIndex = 0;
+modalReader.classList.remove('is-open');
+await cardGen.click();
+assert.ok(modalReader.classList.contains('is-open'), 'Clicking already-selected card should open its action/modal');
+modalReader.classList.remove('is-open');
+
+// 14. Test Y / y Export Keyboard Shortcut
+let exportClicked = false;
+const btnExport = getOrCreateMock('btn-export');
+btnExport.addEventListener('click', () => { exportClicked = true; });
+
+mockDoc.triggerDocEvent('keydown', { key: 'y', preventDefault() {} });
+await new Promise(r => setTimeout(r, 0));
+assert.ok(exportClicked, 'Pressing "y" key should trigger export button click');
+
+exportClicked = false;
+mockDoc.triggerDocEvent('keydown', { key: 'Y', preventDefault() {} });
+await new Promise(r => setTimeout(r, 0));
+assert.ok(exportClicked, 'Pressing "Y" key should trigger export button click');
+
+// 15. Test DB Write Failure Graceful Degradation
+initializedState.dbService = {
+  saveExperience: async () => { throw new Error('Firestore write quota exceeded'); },
+  saveMasterTemplate: async () => { throw new Error('Firestore network error'); },
+  deleteExperience: async () => { throw new Error('Firestore permission denied'); }
+};
+
+// Even if DB write fails, memory is still updated and does not throw
+inputExpTitle.value = 'Offline Story';
+inputExpStory.value = 'Offline story content.';
+inputExpTags.value = 'Offline';
+inputExpId.value = '';
+await btnSaveExp.click();
+assert.ok(initializedState.experiences.some(e => e.title === 'Offline Story'), 'Memory must be updated even when cloud write fails');
+
+tplIntroInput.value = 'Offline Template Intro';
+await btnSaveTpl.click();
+assert.strictEqual(initializedState.masterTemplate.intro, 'Offline Template Intro', 'Template memory must be updated even when cloud write fails');
+
+const offlineStory = initializedState.experiences.find(e => e.title === 'Offline Story');
+inputExpId.value = offlineStory.id;
+await btnDeleteExp.click();
+assert.ok(!initializedState.experiences.some(e => e.title === 'Offline Story'), 'Story must be deleted from memory even when cloud delete fails');
 
 console.log('✓ Task 6 Switch Controller & App Tests passed successfully!');

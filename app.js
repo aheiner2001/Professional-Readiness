@@ -597,7 +597,11 @@ export async function initApp(options = {}) {
     });
 
     card.addEventListener('click', () => {
-      selectCard(idx, cards, activeTitleBanner, soundKlick);
+      if (state.activeCardIndex === idx) {
+        triggerCardAction(idx);
+      } else {
+        selectCard(idx, cards, activeTitleBanner, soundKlick);
+      }
     });
 
     card.addEventListener('dblclick', () => {
@@ -674,6 +678,10 @@ export async function initApp(options = {}) {
       if (isAnyModalOpen) return;
       e.preventDefault();
       openModal(modalReader, soundNews);
+    } else if (e.key === 'y' || e.key === 'Y') {
+      if (isAnyModalOpen) return;
+      e.preventDefault();
+      btnExport?.click();
     } else if (e.key === 'a' || e.key === 'A') {
       if (isAnyModalOpen) return;
       e.preventDefault();
@@ -907,8 +915,15 @@ export async function initApp(options = {}) {
       };
 
       // Persist to DB
+      let writeFailed = false;
       if (state.currentUser && state.dbService) {
-        await state.dbService.saveExperience(state.currentUser.uid, expRecord);
+        try {
+          const res = await state.dbService.saveExperience(state.currentUser.uid, expRecord);
+          if (res === false) writeFailed = true;
+        } catch (err) {
+          console.error("Error saving experience to database:", err);
+          writeFailed = true;
+        }
       }
 
       if (existingIdx >= 0) {
@@ -925,7 +940,11 @@ export async function initApp(options = {}) {
       renderExperienceBankList();
       renderSplitReaderCheckboxes();
       refreshLivePreview();
-      showToast(`Saved "${titleVal}"`);
+      if (writeFailed) {
+        showToast(`Saved "${titleVal}" locally (cloud sync failed)`);
+      } else {
+        showToast(`Saved "${titleVal}"`);
+      }
     });
   }
 
@@ -934,8 +953,19 @@ export async function initApp(options = {}) {
       const idVal = expIdInput?.value.trim();
       if (!idVal) return;
 
+      if (typeof confirm === 'function' && !confirm('Are you sure you want to delete this experience story?')) {
+        return;
+      }
+
+      let writeFailed = false;
       if (state.currentUser && state.dbService) {
-        await state.dbService.deleteExperience(state.currentUser.uid, idVal);
+        try {
+          const res = await state.dbService.deleteExperience(state.currentUser.uid, idVal);
+          if (res === false) writeFailed = true;
+        } catch (err) {
+          console.error("Error deleting experience from database:", err);
+          writeFailed = true;
+        }
       }
 
       state.experiences = state.experiences.filter(e => e.id !== idVal);
@@ -946,7 +976,11 @@ export async function initApp(options = {}) {
       renderExperienceBankList();
       renderSplitReaderCheckboxes();
       refreshLivePreview();
-      showToast('Deleted experience story');
+      if (writeFailed) {
+        showToast('Deleted locally (cloud sync failed)');
+      } else {
+        showToast('Deleted experience story');
+      }
     });
   }
 
@@ -970,13 +1004,24 @@ export async function initApp(options = {}) {
 
       state.masterTemplate = updatedTemplate;
 
+      let writeFailed = false;
       if (state.currentUser && state.dbService) {
-        await state.dbService.saveMasterTemplate(state.currentUser.uid, updatedTemplate);
+        try {
+          const res = await state.dbService.saveMasterTemplate(state.currentUser.uid, updatedTemplate);
+          if (res === false) writeFailed = true;
+        } catch (err) {
+          console.error("Error saving master template to database:", err);
+          writeFailed = true;
+        }
       }
 
       playSound(soundPopup);
       refreshLivePreview();
-      showToast('Master template saved!');
+      if (writeFailed) {
+        showToast('Master template saved locally (cloud sync failed)');
+      } else {
+        showToast('Master template saved!');
+      }
       closeModal(modalTemplate, soundKlick);
     });
   }
