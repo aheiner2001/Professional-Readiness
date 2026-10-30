@@ -1,0 +1,9 @@
+{
+  "name": "professional-readiness-studio",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Nintendo Switch Style Professional Readiness Studio with Firebase",
+  "scripts": {
+    "test": "node test/test-scaffold.js && node test/test-prompt-builder.js && node test/test-seed-data.js"
+  }
+}
