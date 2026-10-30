@@ -226,8 +226,10 @@ function createMockDomElement(id, tagName = 'div') {
       listeners[evt] = listeners[evt] || [];
       listeners[evt].push(fn);
     },
-    click() {
-      (listeners['click'] || []).forEach(fn => fn({ type: 'click', target: this }));
+    async click() {
+      for (const fn of (listeners['click'] || [])) {
+        await fn({ type: 'click', target: this });
+      }
     },
     dblclick() {
       (listeners['dblclick'] || []).forEach(fn => fn({ type: 'dblclick', target: this }));
@@ -351,6 +353,14 @@ assert.strictEqual(initializedState.experiences.length, initialStoryCount + 1, '
 const addedStory = initializedState.experiences.find(e => e.title === 'Autonomous Agents Architecture');
 assert.ok(addedStory, 'Added story should exist in experiences list');
 assert.strictEqual(addedStory.relevantFor.length, 3, 'Tags should be parsed into array');
+assert.strictEqual(inputExpId.value, addedStory.id, 'Saving a new experience should sync generated ID back to inputExpId');
+
+// Test immediate subsequent edit on the open form does not create a duplicate
+inputExpStory.value = 'Architected autonomous agent pairing pipelines with deep verification and zero duplicate IDs.';
+await btnSaveExp.click();
+assert.strictEqual(initializedState.experiences.length, initialStoryCount + 1, 'Subsequent edit should update in place without duplicate records');
+const updatedStory = initializedState.experiences.find(e => e.id === addedStory.id);
+assert.strictEqual(updatedStory.storyText, 'Architected autonomous agent pairing pipelines with deep verification and zero duplicate IDs.', 'Existing story text should be updated in place');
 
 // Delete the story
 inputExpId.value = addedStory.id;
@@ -369,5 +379,38 @@ const btnReset = getOrCreateMock('btn-reset', 'button');
 btnReset.click();
 assert.strictEqual(initializedState.companyName, 'RevBlack', 'Reset should restore default company name');
 assert.strictEqual(initializedState.role, 'AI Solutions Engineer', 'Reset should restore default role');
+
+// 11. Test Modal Keyboard Guard (Arrow keys must not navigate carousel when modal is open)
+const modalReader = getOrCreateMock('modal-reader');
+modalReader.classList.add('is-open');
+const lockedIndex = initializedState.activeCardIndex;
+mockDoc.triggerDocEvent('keydown', { key: 'ArrowRight', preventDefault() {} });
+assert.strictEqual(initializedState.activeCardIndex, lockedIndex, 'ArrowRight should be ignored when modal-reader is open');
+mockDoc.triggerDocEvent('keydown', { key: 'ArrowLeft', preventDefault() {} });
+assert.strictEqual(initializedState.activeCardIndex, lockedIndex, 'ArrowLeft should be ignored when modal-reader is open');
+
+// When modal is closed, carousel navigation resumes
+modalReader.classList.remove('is-open');
+mockDoc.triggerDocEvent('keydown', { key: 'ArrowRight', preventDefault() {} });
+assert.notStrictEqual(initializedState.activeCardIndex, lockedIndex, 'ArrowRight should rotate carousel when modals are closed');
+
+// 12. Test Aaron's Account Restriction for Master Seeding
+const btnSeedData = getOrCreateMock('btn-seed-data', 'button');
+const seedStatus = getOrCreateMock('seed-status', 'p');
+
+// Anonymous Guest user must be blocked with informative notice
+initializedState.currentUser = { uid: 'guest_local', isAnonymous: true, email: 'guest@studio.local' };
+await btnSeedData.click();
+assert.ok(seedStatus.textContent.includes("reserved for Aaron's verified account"), 'Guest user should receive restriction notice');
+
+// Non-Aaron authenticated user must be blocked with informative notice
+initializedState.currentUser = { uid: 'other_user', isAnonymous: false, email: 'john.doe@example.com' };
+await btnSeedData.click();
+assert.ok(seedStatus.textContent.includes("reserved for Aaron's verified account"), 'Non-Aaron user should receive restriction notice');
+
+// Aaron's authenticated account should be permitted to seed
+initializedState.currentUser = { uid: 'aaron_verified', isAnonymous: false, email: 'aaron@byui.edu' };
+await btnSeedData.click();
+assert.ok(seedStatus.textContent.includes('✓ Successfully populated'), 'Aaron verified account should be allowed to seed master library');
 
 console.log('✓ Task 6 Switch Controller & App Tests passed successfully!');

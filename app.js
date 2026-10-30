@@ -636,16 +636,13 @@ export async function initApp(options = {}) {
 
   // 16. Keyboard Navigation Controller
   doc.addEventListener('keydown', (e) => {
-    // Avoid hijacking typing inside inputs or textareas
-    const tag = e.target && e.target.tagName ? e.target.tagName.toLowerCase() : '';
-    const isTyping = tag === 'input' || tag === 'textarea' || tag === 'select';
+    const isAnyModalOpen = [modalReader, modalExperiences, modalTemplate, modalAuth].some(
+      m => m && m.classList && m.classList.contains('is-open')
+    );
 
     // Global Escape / B key: Close open modals
     if (e.key === 'Escape') {
-      const anyOpen = [modalReader, modalExperiences, modalTemplate, modalAuth].some(
-        m => m && m.classList.contains('is-open')
-      );
-      if (anyOpen) {
+      if (isAnyModalOpen) {
         e.preventDefault();
         closeAllModals();
         playSound(soundHome);
@@ -653,6 +650,14 @@ export async function initApp(options = {}) {
       }
     }
 
+    // Modal Keyboard Guard: Ignore carousel navigation when any modal is open
+    if (isAnyModalOpen && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+      return;
+    }
+
+    // Avoid hijacking typing inside inputs or textareas
+    const tag = e.target && e.target.tagName ? e.target.tagName.toLowerCase() : '';
+    const isTyping = tag === 'input' || tag === 'textarea' || tag === 'select';
     if (isTyping) return;
 
     if (e.key === 'ArrowLeft') {
@@ -662,20 +667,20 @@ export async function initApp(options = {}) {
       e.preventDefault();
       selectCard(state.activeCardIndex + 1, cards, activeTitleBanner, soundKlick);
     } else if (e.key === 'Enter') {
+      if (isAnyModalOpen) return;
       e.preventDefault();
       triggerCardAction(state.activeCardIndex);
     } else if (e.key === 'x' || e.key === 'X') {
+      if (isAnyModalOpen) return;
       e.preventDefault();
       openModal(modalReader, soundNews);
     } else if (e.key === 'a' || e.key === 'A') {
+      if (isAnyModalOpen) return;
       e.preventDefault();
       btnCopy?.click();
     } else if (e.key === 'b' || e.key === 'B') {
       e.preventDefault();
-      const anyOpen = [modalReader, modalExperiences, modalTemplate, modalAuth].some(
-        m => m && m.classList.contains('is-open')
-      );
-      if (anyOpen) {
+      if (isAnyModalOpen) {
         closeAllModals();
         playSound(soundHome);
       } else {
@@ -872,11 +877,12 @@ export async function initApp(options = {}) {
       const titleVal = expTitleInput?.value.trim();
       const storyVal = expStoryInput?.value.trim();
       if (!titleVal || !storyVal) {
-        alert('Please provide a Story Title and Narrative Story Text.');
+        if (typeof alert === 'function') alert('Please provide a Story Title and Narrative Story Text.');
         return;
       }
 
       const idVal = expIdInput?.value.trim() || `exp_${Date.now()}`;
+      if (expIdInput) expIdInput.value = idVal;
       const categoryVal = expCategorySelect?.value || 'Technical';
       const tagsVal = (expTagsInput?.value || '')
         .split(',')
@@ -1020,6 +1026,21 @@ export async function initApp(options = {}) {
       if (btnGuestLogin) btnGuestLogin.style.display = 'none';
       if (btnSignOut) btnSignOut.style.display = 'inline-flex';
 
+      const isAaron = Boolean(
+        user &&
+        !user.isAnonymous &&
+        (user.email ? user.email.toLowerCase().includes('aaron') : true)
+      );
+      if (btnSeedData) {
+        btnSeedData.title = isAaron
+          ? "Seed Aaron's 8 master experiences and core template into Firestore"
+          : "Master library seeding is reserved for Aaron's verified account. Please sign in with Google.";
+      }
+      if (seedStatus) {
+        seedStatus.style.display = 'none';
+        seedStatus.textContent = '';
+      }
+
       // Load user data from Firestore
       try {
         if (state.dbService) {
@@ -1047,6 +1068,13 @@ export async function initApp(options = {}) {
       if (btnGoogleLogin) btnGoogleLogin.style.display = 'inline-flex';
       if (btnGuestLogin) btnGuestLogin.style.display = 'inline-flex';
       if (btnSignOut) btnSignOut.style.display = 'none';
+      if (btnSeedData) {
+        btnSeedData.title = "Master library seeding is reserved for Aaron's verified account. Please sign in with Google.";
+      }
+      if (seedStatus) {
+        seedStatus.style.display = 'none';
+        seedStatus.textContent = '';
+      }
     }
 
     renderExperienceBankList();
@@ -1169,14 +1197,28 @@ export async function initApp(options = {}) {
   if (btnSeedData) {
     btnSeedData.addEventListener('click', async () => {
       playSound(soundPopup);
-      if (!state.currentUser) {
-        alert('Please sign in or continue as Guest to seed your library.');
+      const isAaron = Boolean(
+        state.currentUser &&
+        !state.currentUser.isAnonymous &&
+        (state.currentUser.email ? state.currentUser.email.toLowerCase().includes('aaron') : true)
+      );
+
+      if (!isAaron) {
+        const msg = "Master library seeding is reserved for Aaron's verified account. Please sign in with Google.";
+        if (seedStatus) {
+          seedStatus.style.display = 'block';
+          seedStatus.style.color = '#e60012';
+          seedStatus.textContent = msg;
+        }
+        if (typeof alert === 'function') alert(msg);
+        showToast("Master seeding reserved for Aaron's verified account");
         return;
       }
 
       btnSeedData.disabled = true;
       if (seedStatus) {
         seedStatus.style.display = 'block';
+        seedStatus.style.color = '#0885a5';
         seedStatus.textContent = 'Seeding authentic master data from Aboutme_coverletter...';
       }
 
