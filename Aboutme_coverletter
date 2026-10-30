@@ -1,23 +1,270 @@
-You are an expert technical resume and cover letter writer. I want you to use my master cover letter template below and tailor it for a specific job application. 
+# Master Cover Letter Generator Prompt
 
-Here are your instructions:
-1. CUSTOMIZE FOR THE TARGET COMPANY: Read the job description or company details I provide below and weave in subtle, relevant references to their tech stack or mission without changing my core narrative.
-2. PRESERVE MY VOICE: Keep my personal voice, tone, and sentence structure largely intact. Do not make it sound overly stuffy, corporate, or AI-generated. 
-3. DYNAMIC GREETING: Adapt the greeting based on the company or application platform. For example, use "Hey [Company Name] team," "Dear [Hiring Manager's Name]," "Dear [Company Name] Hiring Team," or "Dear Greenhouse," depending on what fits best.
-4. FILL IN THE PLACEHOLDER: Replace "[Insert Company Name]" naturally throughout the text.
+You are an expert technical resume and cover letter writer. I want you to use my master cover letter template and experience bank below to tailor a cover letter for each job application.
+
+## INSTRUCTIONS
+
+**1. CUSTOMIZE FOR THE TARGET COMPANY**
+
+Read the job description carefully. Identify the most important skills, qualifications, responsibilities, and company values.
+
+Use these details to customize my cover letter without changing my core narrative or making the letter sound like it was copied from the job description.
+
+**2. PRESERVE MY VOICE**
+
+This is extremely important. Keep my personal voice, sentence structure, and tone largely intact.
+
+I want to sound like a motivated college student who has practical experience and enjoys learning, not someone using overly polished corporate language.
+
+- Avoid buzzwords and generic AI-generated phrases.
+- Do not exaggerate my experience or qualifications.
+- Use natural, conversational transitions.
+- Make small grammatical improvements where necessary.
+- Keep my original wording whenever it works.
+- Avoid unnecessary filler and overly complicated sentences.
+
+**3. DISTINGUISH BETWEEN CORE CONTENT AND OPTIONAL EXPERIENCES**
+
+My master template contains the core story I want to communicate in every application.
+
+My experience bank contains additional accomplishments, skills, and personal experiences that may or may not be appropriate for a particular position.
+
+When generating a letter:
+
+- Always preserve the primary message from my core template.
+- Review every experience in my experience bank.
+- Select approximately 1–3 of the most relevant optional experiences for the job.
+- Prioritize experiences that directly demonstrate qualifications mentioned in the job description.
+- Integrate the selected experiences naturally into the existing paragraphs.
+- You may replace a less relevant example from the master template with a stronger example from the experience bank.
+- Do not force every experience into the letter.
+- Do not simply list qualifications. Explain their relevance through my actual experience.
+
+**4. DYNAMIC GREETING**
+
+Adapt the greeting to the company and application.
+
+Examples:
+- Hey [Company Name] team,
+- Dear [Company Name] Hiring Team,
+- Dear [Hiring Manager's Name],
+- Dear Greenhouse,
+
+Choose whichever feels most appropriate.
+
+**5. REPLACE PLACEHOLDERS**
+
+Replace "[Insert Company Name]" throughout the letter with the actual company name.
+
+Where possible, make my final paragraph more specific to the position, including why I would enjoy the work and what I could contribute.
+
+**6. MAINTAIN AN APPROPRIATE LENGTH**
+
+Aim for approximately 200–300 words, or slightly longer if necessary. Keep it concise, direct, and meaningful.
+
+**7. PRIORITIZE ACCURACY**
+
+Never invent projects, certifications, responsibilities, technologies, or accomplishments. Do not imply I have already graduated before December 2026.
+
+If I have limited experience with a particular technology, emphasize my related experience and willingness to learn rather than pretending I am an expert.
+
+**8. FINAL OUTPUT**
+
+Return a complete, ready-to-submit cover letter.
+
+Do not include explanations of what you changed unless I specifically request them.
 
 ---
 
-### MY MASTER TEMPLATE:
-"I am currently a student at Brigham Young University–Idaho, projected to graduate in December 2026. Throughout my life, I've enjoyed creating, designing, and implementing new tools to help solve problems that I encounter. 
+# PART 1: MY CORE MASTER TEMPLATE
 
-During my senior year at the university, I have been able to build and deploy software for local businesses, including a project for Sunny Car Detailing where I migrated records for hundreds of users and set up an automated deployment pipeline using GitHub Actions and Vercel. I constantly work with data, managing production and deployment pipelines to ensure that no company data is leaked. Through my internships—including my time with Downwinders Advocates—I have handled data transitions between software systems, exported complex data, and troubleshot pipeline errors.
+These paragraphs represent my primary story. Preserve their general structure, personal tone, and message across applications. Specific technical examples may be replaced when a different example would be more relevant.
 
-I am a quick learner who thrives on the job. Whatever I am doing professionally, I take pride in finding resources that help me rise to a higher level every day. Once I start a project, I stay fully engaged; even after the initial work is done, I keep thinking in the back of my mind about how to improve it. 
+"I am currently a student at Brigham Young University–Idaho, projected to graduate in December 2026 with a bachelor's degree in Computer Science. Throughout my life, I've enjoyed creating, designing, and implementing new tools to help solve problems that I encounter.
+
+During my senior year at the university, I have been able to build and deploy software for local businesses, including a project for Sunny Car Detailing where I migrated records for hundreds of users and set up an automated deployment pipeline using GitHub Actions and Vercel. I constantly work with data, managing production and deployment pipelines while taking precautions to protect company data. Through my internships, including my time with Downwinders Advocates, I have handled data transitions between software systems, exported complex data, and troubleshot pipeline errors.
+
+I am a quick learner who thrives on the job. Whatever I am doing professionally, I take pride in finding resources that help me rise to a higher level every day. Once I start a project, I stay fully engaged; even after the initial work is done, I keep thinking in the back of my mind about how to improve it.
 
 I am looking for an opportunity where I can grow, which is why I feel like [Insert Company Name] would be a great fit. Here, I would be able to build real tools under professional guidance and work alongside experienced engineers who can help me grow in a professional way."
 
 ---
 
-### TARGET JOB DETAILS / COMPANY SPECIFICATIONS:
-[PASTE JOB DESCRIPTION OR COMPANY INFO HERE]
+# PART 2: OPTIONAL EXPERIENCE BANK
+
+These are experiences ChatGPT can choose from when relevant to the target job. They are not all meant to appear in the same cover letter.
+
+The wording can be adjusted slightly to improve transitions and fit the context, but preserve the facts and my personal tone.
+
+## A. Leadership, Business Ownership, and Customer Relations
+
+**Relevant for:** Leadership, operations, customer success, consulting, client-facing engineering, project management, and positions requiring independence.
+
+"I spent three years working as a crew leader and managing my own business, Fresh Paint Solutions. Through this experience, I worked directly with customers and learned the importance of communication, setting clear expectations, and making sure the job was completed correctly. I learned how important it is to be dependable and take responsibility for the work I do."
+
+This experience can demonstrate:
+- Leadership and accountability
+- Customer relationships and communication
+- Quality assurance and meeting expectations
+- Business operations and responsibility
+- Problem-solving in real-world situations
+- Independence and dependability
+
+## B. Self-Motivation, Remote Work, and Time Management
+
+**Relevant for:** Remote and hybrid positions, self-directed work, internships, independent development, and jobs requiring strong organizational skills.
+
+"Throughout my time at BYU–Idaho, I have completed multiple semesters of coursework online, which has helped me become very comfortable working independently and managing my time. I've learned how to stay motivated, organize my responsibilities, and balance multiple projects while continuing to learn new skills."
+
+This experience can demonstrate:
+- Remote work readiness
+- Time management
+- Self-motivation
+- Independent learning
+- Managing competing priorities
+- Comfort working with computers and digital tools
+
+## C. Spanish Fluency and International Experience
+
+**Relevant for:** Bilingual positions, customer support, international companies, consulting, and jobs involving Spanish-speaking clients or teams.
+
+"I lived in Chile for two years, where I became fluent in conversational Spanish. That experience taught me how to communicate with people from different backgrounds and adapt to new environments. I'm comfortable communicating in Spanish and learning job-specific terminology when needed."
+
+This experience can demonstrate:
+- Conversational Spanish fluency
+- Cross-cultural communication
+- Adaptability
+- Interpersonal communication
+- Willingness to learn
+
+Do not claim native-level Spanish fluency or professional translation expertise.
+
+## D. Databases and Cloud Platforms
+
+**Relevant for:** Software engineering, data engineering, operations engineering, cloud engineering, and database-related positions.
+
+"Through my coursework and software projects, I've gained experience working with different types of databases and cloud services, including AWS, Firebase, and relational databases such as MySQL. I've enjoyed learning the differences between these systems, understanding their strengths, and finding which approach works best for a particular project."
+
+Potential technologies to emphasize when relevant:
+- AWS, including DynamoDB and Lambda
+- Firebase and Firestore
+- Relational databases and SQL
+- MySQL
+- Data storage and retrieval
+- Cloud infrastructure and services
+- Database design and management
+
+Only reference specific services or technologies when my actual experience supports the claim.
+
+## E. Software Development and Deployment — Sunny Car Detailing
+
+**Relevant for:** Full-stack development, frontend engineering, backend engineering, QA, DevOps, and software engineering internships.
+
+"During my senior year, I worked on building and deploying a fleet management application for Sunny Car Detailing. This included working with TypeScript, Firebase, GitHub Actions, and Vercel to develop features, manage data, and maintain the application. I've enjoyed seeing how different technologies come together to create a tool that people can actually use."
+
+Relevant experience includes:
+- Building and deploying web applications
+- TypeScript, Next.js, and Firebase
+- GitHub Actions and Vercel
+- Data management and integrations
+- Automated deployment workflows
+- Debugging, testing, and maintaining software
+- Improving existing features based on business needs
+
+Select the strongest details for the position rather than describing every feature.
+
+## F. Data Migration and Troubleshooting — Downwinders Advocates
+
+**Relevant for:** Data engineering, data analysis, operations, integrations, automation, and consulting.
+
+"During my internship with Downwinders Advocates, I worked on transitioning information between different software platforms. This involved organizing data, exporting and formatting records, working through integration issues, and troubleshooting errors to ensure the data was transferred correctly."
+
+Relevant experience includes:
+- Data cleaning and transformation
+- Python scripts for organizing data
+- CSV and JSON processing
+- Software integrations
+- Data validation
+- Troubleshooting migration errors
+- Working with client and business records
+
+## G. Python, SQL, and Data Analysis
+
+**Relevant for:** Data analyst, operations engineer, data engineer, business intelligence, and backend development roles.
+
+"I've worked with Python, Pandas, and SQL through my coursework and personal projects, where I've learned how to organize, transform, and work with different types of data. I enjoy finding ways to make repetitive processes more efficient and using data to better understand and solve problems."
+
+Additional tools and experience that may be relevant:
+- Python
+- Pandas
+- SQL
+- Google Cloud Platform and BigQuery
+- Jupyter Notebooks
+- CSV and JSON data processing
+- Automated scripts and reports
+
+Do not describe me as an expert in every tool. My experience varies across these technologies.
+
+## H. Learning New Technologies and Adapting Quickly
+
+**Relevant for:** Entry-level positions, internships, startups, and jobs involving unfamiliar technologies.
+
+"One of the strengths I bring to a team is that I am dependable and quick to learn. I know that I am still early in my career, but I've found that when I am given a new challenge, I can research what I need, learn the tools, and work toward a solution. I enjoy the process of figuring things out and becoming better at what I do."
+
+This theme is already part of my core template, so use it to strengthen the existing message rather than repeating the same point in multiple paragraphs.
+
+---
+
+# PART 3: EXPERIENCE SELECTION RULES
+
+Before writing the cover letter, internally compare the job description to my experience bank.
+
+Use the following as general guidance:
+
+| Job Type | Experiences to Prioritize |
+|---|---|
+| Software Engineer | Sunny, software development, databases, learning ability |
+| Data Analyst | Python, Pandas, SQL, data migration, databases |
+| Data Engineer | Databases, cloud services, data pipelines, migration |
+| Operations Engineer | Troubleshooting, data validation, SQL, dependability |
+| QA / Software Testing | Sunny, testing, debugging, quality assurance |
+| DevOps / Cloud Engineer | AWS, Firebase, deployment pipelines, GitHub Actions |
+| Customer Success / Consulting | Business ownership, customer communication, Spanish |
+| Remote Software Position | Online coursework, time management, independent work |
+| Startup Position | Business ownership, adaptability, independence, software projects |
+| Bilingual Position | Chile experience, Spanish fluency, communication |
+
+These are guidelines, not strict rules. The actual job description should determine which examples are strongest.
+
+**Important:** If an optional experience is a significantly better match than an example already in the core template, replace that example rather than making the letter unnecessarily long.
+
+---
+
+# PART 4: FINAL WRITING GUIDELINES
+
+Every letter should communicate four things:
+
+1. **Who I am:** A Computer Science student finishing my degree in December 2026 who enjoys building tools and solving problems.
+2. **What I've done:** Relevant software, technical, business, or personal experiences that demonstrate my qualifications.
+3. **How I work:** I'm dependable, self-motivated, quick to learn, and willing to take responsibility for my work.
+4. **Why I'm applying:** I want to contribute meaningful work, continue learning, and grow alongside experienced professionals.
+
+Make sure the letter flows naturally rather than feeling like separate accomplishments stitched together.
+
+I want the reader to feel that I personally wrote the letter and understand why my experiences make me a good candidate.
+
+Do not overemphasize my lack of professional experience or repeatedly state that I am entry-level. Instead, communicate my practical skills and potential confidently without exaggerating.
+
+---
+
+# PART 5: TARGET JOB DETAILS / COMPANY SPECIFICATIONS
+
+[PASTE JOB DESCRIPTION OR COMPANY INFORMATION HERE]
+
+---
+
+**FINAL TASK:**
+
+Using the job description above, generate the strongest possible cover letter while preserving my personal writing style, retaining my core story, and selectively integrating the most relevant examples from my experience bank.
+
+Keep it natural, concise, truthful, and specific to the position.
