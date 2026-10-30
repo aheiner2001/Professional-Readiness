@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nintendo Switch - Professional Readiness Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Fullscreen Nintendo Switch Console Frame -->
+  <main class="switch-viewport">
+
+    <!-- 1. Top Status Row: Profile Avatar, Display Name, Clock, System Status -->
+    <header class="switch-top-row">
+      <div class="switch-profiles" id="profile-btn" role="button" tabindex="0" title="Profile & Account Settings">
+        <div class="switch-avatar" id="avatar-container">
+          <img src="./img/cuphead-logo.png" alt="Profile" id="avatar-img">
+        </div>
+        <div class="switch-profile-info">
+          <span class="switch-profile-name" id="profile-name">Aaron's Studio</span>
+          <span class="switch-profile-badge" id="profile-badge">Online</span>
+        </div>
+      </div>
+
+      <div class="switch-status-tray">
+        <span id="clock">12:00 PM</span>
+        <i class="fas fa-wifi" title="Connected"></i>
+        <i class="fas fa-battery-three-quarters" title="Battery 75%"></i>
+      </div>
+    </header>
+
+    <!-- 2. Active Selection Title Banner -->
+    <div class="switch-active-title-wrap">
+      <h2 class="switch-active-title" id="active-title-banner">Application Generator: Build Tailored Prompts & Letters</h2>
+    </div>
+
+    <!-- 3. Centered Switch Card Carousel (5 Cartridge Cards) -->
+    <section class="switch-carousel-container" id="carousel-container" aria-label="Nintendo Switch Game Cards">
+
+      <!-- Card 1: Application Generator (Active by default) -->
+      <article class="switch-card is-selected" id="card-generator" data-index="0" data-title="Application Generator: Build Tailored Prompts & Letters" tabindex="0">
+        <span class="card-badge" id="badge-generator">ACTIVE</span>
+        <i class="card-icon fas fa-wand-magic-sparkles"></i>
+        <h3 class="card-title">Application Generator</h3>
+        <p class="card-subtitle">Build Tailored Prompts &amp; Letters</p>
+      </article>
+
+      <!-- Card 2: Core Master Template -->
+      <article class="switch-card" id="card-template" data-index="1" data-title="Core Master Template: Narrative & Voice Guidelines" tabindex="0">
+        <span class="card-badge" id="badge-template">VOICE</span>
+        <i class="card-icon fas fa-file-lines"></i>
+        <h3 class="card-title">Master Template</h3>
+        <p class="card-subtitle">Narrative &amp; BYU–Idaho Voice</p>
+      </article>
+
+      <!-- Card 3: Experience Bank -->
+      <article class="switch-card" id="card-experiences" data-index="2" data-title="Experience Bank: Manage Career Stories & Skills" tabindex="0">
+        <span class="card-badge" id="badge-exp-count">8 STORIES</span>
+        <i class="card-icon fas fa-briefcase"></i>
+        <h3 class="card-title">Experience Bank</h3>
+        <p class="card-subtitle">Manage Career Accomplishments</p>
+      </article>
+
+      <!-- Card 4: Resume Studio -->
+      <article class="switch-card" id="card-resume" data-index="3" data-title="Resume Studio: Bullet Points & Alignment" tabindex="0">
+        <span class="card-badge" id="badge-resume">STUDIO</span>
+        <i class="card-icon fas fa-address-card"></i>
+        <h3 class="card-title">Resume Studio</h3>
+        <p class="card-subtitle">Bullet Points &amp; Technical Alignment</p>
+      </article>
+
+      <!-- Card 5: Interview Prep -->
+      <article class="switch-card" id="card-interview" data-index="4" data-title="Interview Prep: STAR Method & Practice Q&A" tabindex="0">
+        <span class="card-badge" id="badge-interview">STAR</span>
+        <i class="card-icon fas fa-comments"></i>
+        <h3 class="card-title">Interview Prep</h3>
+        <p class="card-subtitle">STAR Method &amp; Practice Q&amp;A</p>
+      </article>
+
+    </section>
+
+    <!-- 4. Tactile Circular Option Buttons -->
+    <div class="switch-options-row">
+      <button type="button" class="switch-circle-btn" id="btn-copy" title="Copy Output (A / Enter)">
+        <i class="fas fa-copy icon-copy"></i>
+        <span class="btn-tooltip">Copy Output (A)</span>
+      </button>
+
+      <button type="button" class="switch-circle-btn" id="btn-split-reader" title="Split Reader / Editor (X)">
+        <i class="fas fa-book-open icon-split"></i>
+        <span class="btn-tooltip">Split Workspace (X)</span>
+      </button>
+
+      <button type="button" class="switch-circle-btn" id="btn-export" title="Download / Export (Y)">
+        <i class="fas fa-file-arrow-down icon-export"></i>
+        <span class="btn-tooltip">Export File (Y)</span>
+      </button>
+
+      <button type="button" class="switch-circle-btn" id="btn-reset" title="Reset Form (B / Escape)">
+        <i class="fas fa-rotate-left icon-reset"></i>
+        <span class="btn-tooltip">Reset Form (B)</span>
+      </button>
+    </div>
+
+    <!-- 5. Footer: System Information & Keyboard Hints -->
+    <footer class="switch-footer-row">
+      <div class="footer-stats-text" id="footer-stats">
+        Nintendo Switch Studio &bull; Ready for Applications
+      </div>
+      <div class="footer-hints">
+        <span><span class="footer-key-badge">&larr; &rarr;</span> Navigate</span>
+        <span><span class="footer-key-badge">Enter / A</span> Open / Copy</span>
+        <span><span class="footer-key-badge">X</span> Split Workspace</span>
+        <span><span class="footer-key-badge">Esc / B</span> Close</span>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ==========================================================================
+       MODAL 1: Split Reader / Live Editor Workspace
+       ========================================================================== -->
+  <div class="modal-overlay" id="modal-reader" role="dialog" aria-modal="true" aria-labelledby="reader-title">
+    <div class="reader-split-modal">
+      <div class="reader-modal-header">
+        <h2 class="reader-modal-title" id="reader-title">
+          <i class="fas fa-book-open"></i>
+          <span id="reader-modal-title-text">Split Reader &amp; Application Studio</span>
+        </h2>
+        <button type="button" class="modal-close-icon" id="btn-close-reader-x" title="Close Workspace">&times;</button>
+      </div>
+
+      <div class="reader-split-layout">
+        <!-- Left Column: Live Document Paper Preview -->
+        <div class="reader-book-center" id="reader-book-container">
+          <div class="paper-actions-bar">
+            <button type="button" class="btn-paper-action" id="btn-reader-copy" title="Copy text to clipboard">
+              <i class="fas fa-copy"></i> Copy Output
+            </button>
+            <button type="button" class="btn-paper-action" id="btn-reader-export" title="Download text">
+              <i class="fas fa-download"></i> Download
+            </button>
+          </div>
+          <h1 id="preview-title" class="book-h1">Cover Letter Preview</h1>
+          <p id="preview-greeting" class="book-auth">Dear Hiring Team,</p>
+          <hr class="book-divider-line">
+          <div id="preview-blocks" class="preview-output-box"></div>
+        </div>
+
+        <!-- Right Column: Live Controls -->
+        <aside class="reader-side-panel">
+          <div>
+            <h4 class="side-section-title">Generation Mode</h4>
+            <div class="mode-segmented-control" role="tablist">
+              <button type="button" class="mode-segment-btn is-active" id="mode-ai-prompt" role="tab" aria-selected="true">
+                Tailored AI Prompt
+              </button>
+              <button type="button" class="mode-segment-btn" id="mode-word-for-word" role="tab" aria-selected="false">
+                Word-for-Word
+              </button>
+            </div>
+          </div>
+
+          <div class="side-input-group">
+            <label for="input-company">Target Company Name</label>
+            <input type="text" id="input-company" class="side-input-field" placeholder="e.g. Google, Apple, RevBlack" value="RevBlack">
+          </div>
+
+          <div class="side-input-group">
+            <label for="select-role">Target Role</label>
+            <select id="select-role" class="side-input-field">
+              <option value="AI Solutions Engineer" selected>AI Solutions Engineer</option>
+              <option value="Full Stack Software Engineer">Full Stack Software Engineer</option>
+              <option value="Frontend Developer">Frontend Developer</option>
+              <option value="Data Analyst / Engineer">Data Analyst / Engineer</option>
+              <option value="Customer Support Engineer">Customer Support Engineer</option>
+              <option value="custom">Custom Role...</option>
+            </select>
+          </div>
+
+          <div id="custom-role-wrapper" class="side-input-group" style="display: none;">
+            <label for="input-custom-role">Custom Role Title</label>
+            <input type="text" id="input-custom-role" class="side-input-field" placeholder="e.g. Solutions Architect">
+          </div>
+
+          <div class="side-input-group">
+            <label for="input-job-description">Target Job Description</label>
+            <textarea id="input-job-description" class="side-input-field" rows="4" placeholder="Paste job posting or requirements here to auto-match experiences..."></textarea>
+          </div>
+
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+              <h4 class="side-section-title" style="margin-bottom: 0;">Experience Bank Selection</h4>
+              <span id="relevance-suggestions" style="font-size: 0.72rem; color: #0885a5;"></span>
+            </div>
+            <div class="exp-checkbox-list" id="experiences-checkbox-list">
+              <!-- Dynamically populated from Experience Bank -->
+            </div>
+          </div>
+
+          <button type="button" class="btn-reader-close" id="btn-close-reader">Done</button>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL 2: Experience Bank Manager
+       ========================================================================== -->
+  <div class="modal-overlay" id="modal-experiences" role="dialog" aria-modal="true" aria-labelledby="exp-modal-title">
+    <div class="switch-modal-container" style="max-width: 960px;">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exp-modal-title">
+          <i class="fas fa-briefcase"></i> Experience Bank Manager
+        </h2>
+        <button type="button" class="modal-close-icon" id="btn-close-experiences">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="crud-grid-layout">
+          <!-- Left List Sidebar -->
+          <div class="crud-list-sidebar">
+            <button type="button" class="btn-primary-action" id="btn-add-experience" style="margin-bottom: 8px;">
+              <i class="fas fa-plus"></i> New Story
+            </button>
+            <div id="experiences-list" style="display: flex; flex-direction: column; gap: 8px;">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Right Edit Form -->
+          <form class="crud-form-main" id="form-experience" onsubmit="return false;">
+            <input type="hidden" id="exp-id" value="">
+
+            <div class="side-input-group">
+              <label for="exp-title">Story / Position Title</label>
+              <input type="text" id="exp-title" class="side-input-field" placeholder="e.g. Software Development — Sunny Car Detailing" required>
+            </div>
+
+            <div class="side-input-group">
+              <label for="exp-category">Category</label>
+              <select id="exp-category" class="side-input-field">
+                <option value="Technical">Technical</option>
+                <option value="Leadership">Leadership</option>
+                <option value="Data">Data</option>
+                <option value="Bilingual">Bilingual</option>
+              </select>
+            </div>
+
+            <div class="side-input-group">
+              <label for="exp-tags">Relevant For (Comma-separated tags)</label>
+              <input type="text" id="exp-tags" class="side-input-field" placeholder="e.g. Software engineering, automation, full stack">
+            </div>
+
+            <div class="side-input-group">
+              <label for="exp-story">Narrative Story Text</label>
+              <textarea id="exp-story" class="side-input-field" rows="4" placeholder="Full narrative paragraph..." required></textarea>
+            </div>
+
+            <div class="side-input-group">
+              <label for="exp-bullets">Key Takeaways / Bullets (One per line)</label>
+              <textarea id="exp-bullets" class="side-input-field" rows="3" placeholder="- Built scalable solution&#10;- Led customer interviews"></textarea>
+            </div>
+
+            <div class="form-actions-row">
+              <button type="button" class="btn-danger-action" id="btn-delete-experience">Delete Story</button>
+              <button type="button" class="btn-primary-action" id="btn-save-experience">Save Story</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL 3: Master Template Editor
+       ========================================================================== -->
+  <div class="modal-overlay" id="modal-template" role="dialog" aria-modal="true" aria-labelledby="tpl-modal-title">
+    <div class="switch-modal-container" style="max-width: 900px;">
+      <div class="modal-header">
+        <h2 class="modal-title" id="tpl-modal-title">
+          <i class="fas fa-file-lines"></i> Core Master Template &amp; Voice
+        </h2>
+        <button type="button" class="modal-close-icon" id="btn-close-template">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form class="crud-form-main" id="form-template" onsubmit="return false;">
+          <div class="side-input-group">
+            <label for="template-greeting">Default Greeting</label>
+            <input type="text" id="template-greeting" class="side-input-field" value="Dear [Company Name] Hiring Team,">
+          </div>
+
+          <div class="side-input-group">
+            <label for="template-intro">Core Intro &amp; BYU–Idaho Background</label>
+            <textarea id="template-intro" class="side-input-field" rows="3"></textarea>
+          </div>
+
+          <div class="side-input-group">
+            <label for="template-senior-project">Senior Project &amp; Technical Highlight</label>
+            <textarea id="template-senior-project" class="side-input-field" rows="3"></textarea>
+          </div>
+
+          <div class="side-input-group">
+            <label for="template-philosophy">Learning Philosophy &amp; Resourcefulness</label>
+            <textarea id="template-philosophy" class="side-input-field" rows="3"></textarea>
+          </div>
+
+          <div class="side-input-group">
+            <label for="template-closing">Closing Goal &amp; Value Proposition (use [Insert Company Name])</label>
+            <textarea id="template-closing" class="side-input-field" rows="3"></textarea>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
+            <div class="side-input-group">
+              <label for="template-university">University</label>
+              <input type="text" id="template-university" class="side-input-field" value="Brigham Young University–Idaho">
+            </div>
+            <div class="side-input-group">
+              <label for="template-degree">Degree</label>
+              <input type="text" id="template-degree" class="side-input-field" value="Bachelor's degree in Computer Science">
+            </div>
+            <div class="side-input-group">
+              <label for="template-graduation">Graduation Date</label>
+              <input type="text" id="template-graduation" class="side-input-field" value="December 2026">
+            </div>
+          </div>
+
+          <div class="form-actions-row">
+            <button type="button" class="btn-primary-action" id="btn-save-template">Save Master Template</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL 4: User Profile & Authentication
+       ========================================================================== -->
+  <div class="modal-overlay" id="modal-auth" role="dialog" aria-modal="true" aria-labelledby="auth-modal-title">
+    <div class="switch-modal-container" style="max-width: 500px;">
+      <div class="modal-header">
+        <h2 class="modal-title" id="auth-modal-title">
+          <i class="fas fa-user-circle"></i> Switch User Profile
+        </h2>
+        <button type="button" class="modal-close-icon" id="btn-close-auth">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="auth-profile-box" id="auth-user-info">
+          <div class="auth-avatar-large" id="auth-user-avatar">
+            <img src="./img/cuphead-logo.png" alt="User Avatar" id="auth-avatar-img">
+          </div>
+          <div>
+            <h3 class="auth-name-display" id="auth-user-name">Guest User</h3>
+            <p class="auth-email-display" id="auth-user-email">guest@studio.local</p>
+          </div>
+
+          <div class="auth-buttons-group">
+            <button type="button" class="btn-auth-action btn-auth-google" id="btn-google-login">
+              <i class="fab fa-google"></i> Sign in with Google
+            </button>
+            <button type="button" class="btn-auth-action" id="btn-guest-login">
+              <i class="fas fa-user-secret"></i> Continue as Guest
+            </button>
+            <button type="button" class="btn-auth-action" id="btn-sign-out" style="display: none;">
+              <i class="fas fa-right-from-bracket"></i> Sign Out
+            </button>
+          </div>
+
+          <!-- Private Master Seeding Section (For Aaron's Account) -->
+          <div class="auth-private-seed-section" id="auth-seed-section">
+            <h4 class="seed-section-title">Master Library Population</h4>
+            <p class="seed-section-desc">Seed your private Firestore account with Aaron's 8 curated experiences and master template from Aboutme_coverletter.</p>
+            <button type="button" class="btn-primary-action" id="btn-seed-data" style="width: 100%;">
+              <i class="fas fa-cloud-arrow-down"></i> Seed My Master Library
+            </button>
+            <p id="seed-status" style="font-size: 0.75rem; margin-top: 6px; color: #0885a5; display: none;"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       Nintendo Switch Audio Elements
+       ========================================================================== -->
+  <audio id="audio" src="./sounds/Popup.wav" preload="auto"></audio>
+  <audio id="profileSound" src="./sounds/User.wav" preload="auto"></audio>
+  <audio id="klick" src="./sounds/Klick.wav" preload="auto"></audio>
+  <audio id="news" src="./sounds/News.wav" preload="auto"></audio>
+  <audio id="home-sound" src="./sounds/Home.wav" preload="auto"></audio>
+
+  <!-- Main Application Controller Module -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
