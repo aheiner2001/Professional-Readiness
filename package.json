@@ -4,6 +4,6 @@
   "type": "module",
   "description": "Nintendo Switch Style Professional Readiness Studio with Firebase",
   "scripts": {
-    "test": "node test/test-scaffold.js && node test/test-prompt-builder.js && node test/test-seed-data.js"
+    "test": "node test/test-scaffold.js && node test/test-prompt-builder.js && node test/test-seed-data.js && node test/test-auth-config.js && node test/test-ui-dom.js && node test/test-app-controller.js"
   }
 }
