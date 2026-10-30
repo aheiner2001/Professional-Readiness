@@ -77,4 +77,16 @@ assert.ok(letterOutput.includes("Sunny Car Detailing"), "Should include selected
 const matchedIds = matchKeywords("We need an engineer experienced with Python, SQL, and data migration", mockExperiences);
 assert.strictEqual(matchedIds[0], "downwinders", "Downwinders should be top match for Python/SQL job description");
 
+// Test 4: Defensive defaults verification
+const defaultPrompt = buildTailoredAIPrompt();
+assert.ok(defaultPrompt.includes("# Master Cover Letter Generator Prompt"));
+
+const defaultLetter = buildWordForWordLetter();
+assert.ok(defaultLetter.includes("Sincerely,\nAaron Heiner"));
+
+const matchesWithNulls = matchKeywords("python", [
+  { id: "partial", title: null, category: null, relevantFor: ["Python"], bulletPoints: null }
+]);
+assert.deepStrictEqual(matchesWithNulls, ["partial"]);
+
 console.log('✓ Task 2 prompt builder tests passed successfully!');

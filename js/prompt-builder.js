@@ -6,10 +6,10 @@ export function buildTailoredAIPrompt({
   companyName = "the target company",
   role = "the position",
   jobDescription = "",
-  masterTemplate,
+  masterTemplate = {},
   experiences = [],
   selectedExperienceIds = []
-}) {
+} = {}) {
   const chosenExperiences = selectedExperienceIds.length > 0
     ? experiences.filter(exp => selectedExperienceIds.includes(exp.id))
     : experiences;
@@ -131,11 +131,11 @@ Using the job description above, generate the strongest possible cover letter fo
 export function buildWordForWordLetter({
   companyName = "Company",
   role = "Applicant",
-  masterTemplate,
+  masterTemplate = {},
   experiences = [],
   selectedExperienceIds = [],
   greeting = `Dear ${companyName} Hiring Team,`
-}) {
+} = {}) {
   const chosenExperiences = experiences.filter(exp => selectedExperienceIds.includes(exp.id));
 
   const intro = masterTemplate.intro || "";
@@ -169,7 +169,7 @@ export function matchKeywords(jobDescription = "", experiences = []) {
       ...(exp.bulletPoints || []),
       exp.title,
       exp.category
-    ].map(k => k.toLowerCase());
+    ].filter(Boolean).map(k => k.toLowerCase());
 
     keywords.forEach(kw => {
       if (kw && lowerJob.includes(kw)) {
